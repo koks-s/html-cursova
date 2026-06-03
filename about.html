@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <meta name="description" content="Про BUKO — наша команда та цінності">
+  <title>Про нас — BUKO Меблі</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="header" id="header">
+    <div class="header__inner">
+      <a href="index.html" class="logo">BUKO</a>
+      <nav class="nav" id="menuList">
+        <ul class="nav__list">
+          <li><a href="index.html" class="nav__link">Головна</a></li>
+          <li><a href="products.html" class="nav__link">Каталог</a></li>
+          <li><a href="about.html" class="nav__link nav__link--active">Про нас</a></li>
+          <li><a href="contacts.html" class="nav__link">Контакти</a></li>
+        </ul>
+      </nav>
+      <div class="header__actions">
+        <button class="btn-icon" onclick="openModal()"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></button>
+        <button class="burger" id="burgerIcons"><span id="iconBars"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span><span id="iconXmark" class="hide"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></button>
+      </div>
+    </div>
+  </header>
+
+  <section class="page-hero page-hero--sm">
+    <div class="page-hero__content">
+      <p class="breadcrumb"><a href="index.html">Головна</a> / Про нас</p>
+      <h1>Про BUKO</h1>
+      <p>Ми створюємо меблі, які живуть разом із вами</p>
+    </div>
+  </section>
+
+  <!-- ABOUT INTRO -->
+  <section class="about-intro">
+    <div class="container">
+      <div class="about-intro__grid">
+        <div class="about-intro__text">
+          <p class="section-label">Наша місія</p>
+          <h2 class="section-title">Якість, що<br>відчувається</h2>
+          <p>BUKO — це більше ніж магазин меблів. Це простір, де починаються ідеї для вашого дому. Ми віримо, що гарне оточення впливає на якість життя.</p>
+          <p>З 2015 року ми допомагаємо українцям створювати затишні інтер'єри. Кожен виріб — результат роботи майстрів, які люблять свою справу.</p>
+          <div class="about-stats">
+            <div class="stat"><strong>2015</strong><span>Рік заснування</span></div>
+            <div class="stat"><strong>12 000+</strong><span>Задоволених клієнтів</span></div>
+            <div class="stat"><strong>350+</strong><span>Товарів у каталозі</span></div>
+          </div>
+        </div>
+        <div class="about-intro__visual">
+          <div class="about-img-block">
+            <div class="about-img about-img--1"></div>
+            <div class="about-img about-img--2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="values">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Наші цінності</p>
+        <h2 class="section-title">Місія та візія</h2>
+      </div>
+      <div class="values__grid">
+        <div class="value-card">
+          <div class="value-card__num">01</div>
+          <h3>Натуральні матеріали</h3>
+          <p>Використовуємо лише сертифіковану деревину та екологічно чисті тканини. Бо ваш дім заслуговує на найкраще.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-card__num">02</div>
+          <h3>Майстерність</h3>
+          <p>Кожен виріб проходить через руки досвідчених майстрів. Детальна обробка, міцні з'єднання, довговічність.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-card__num">03</div>
+          <h3>Сталий розвиток</h3>
+          <p>Відповідально ставимось до природи. Наші постачальники — сертифіковані лісогосподарства з відновлюваними посадками.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-card__num">04</div>
+          <h3>Сервіс та підтримка</h3>
+          <p>Від вибору до встановлення — ми поруч. Наші дизайнери допоможуть підібрати меблі під ваш простір.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Команда</p>
+        <h2 class="section-title">Люди за брендом</h2>
+        <p class="section-desc">Захоплені своєю справою — від дизайну до доставки</p>
+      </div>
+      <div class="team__grid" id="teamGrid"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand"><a href="index.html" class="logo logo--light">BUKO</a><p>Меблі, що розповідають вашу історію.</p></div>
+        <div class="footer__col"><h4>Навігація</h4><ul><li><a href="index.html">Головна</a></li><li><a href="products.html">Каталог</a></li><li><a href="about.html">Про нас</a></li><li><a href="contacts.html">Контакти</a></li></ul></div>
+        <div class="footer__col"><h4>Категорії</h4><ul><li><a href="#">Вітальня</a></li><li><a href="#">Спальня</a></li><li><a href="#">Кухня</a></li><li><a href="#">Офіс</a></li></ul></div>
+        <div class="footer__col"><h4>Контакти</h4><ul><li>вул. Хрещатик, 10, Київ</li><li><a href="mailto:hello@buko.ua">hello@buko.ua</a></li><li><a href="tel:+380441234567">+38 (044) 123-45-67</a></li></ul></div>
+      </div>
+      <div class="footer__bottom"><p>© 2025 BUKO. Усі права захищено.</p></div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" onclick="scrollToTop()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(this)">
+    <div class="modal" onclick="event.stopPropagation()">
+      <button class="modal__close" onclick="closeModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      <h2 class="modal__title">Зв'яжіться з нами</h2>
+      <p class="modal__sub">Залиште заявку і ми передзвонимо</p>
+      <div class="modal__form">
+        <div class="form-group"><label>Ім'я</label><input type="text" placeholder="Ваше ім'я" class="form-input"></div>
+        <div class="form-group"><label>Телефон</label><input type="tel" placeholder="+38 (___) ___-__-__" class="form-input"></div>
+        <div class="form-group"><label>Повідомлення</label><textarea placeholder="Ваше питання..." class="form-input form-textarea"></textarea></div>
+        <button class="btn btn--primary btn--full" onclick="submitForm()">Надіслати</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    const teamMembers = [
+      { name: 'Юлія Савченко', role: 'Засновниця та CEO', init: 'ЮС' },
+      { name: 'Олексій Петренко', role: 'Головний дизайнер', init: 'ОП' },
+      { name: 'Аліна Іваненко', role: 'Менеджер з клієнтів', init: 'АІ' },
+    ];
+    const grid = document.getElementById('teamGrid');
+    teamMembers.forEach(m => {
+      grid.innerHTML += `
+        <div class="team-card">
+          <div class="team-card__avatar">${m.init}</div>
+          <h3>${m.name}</h3>
+          <p>${m.role}</p>
+        </div>`;
+    });
+  </script>
+</body>
+</html>
