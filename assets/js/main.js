@@ -274,6 +274,47 @@ function initReveal() {
   activateReveal();
 }
 
+// === MODAL AUTHORIZATION WINDOW LOGIC === */
+
+const accountBtn = document.getElementById('account-btn');
+const authModal = document.getElementById('auth-modal');
+const closeAuthBtn = document.getElementById('close-auth-btn');
+const authForm = document.getElementById('auth-form');
+
+if (accountBtn && authModal) {
+  accountBtn.addEventListener('click', () => {
+    authModal.classList.add('open');
+  });
+}
+
+if (closeAuthBtn && authModal) {
+  closeAuthBtn.addEventListener('click', () => {
+    authModal.classList.remove('open');
+  });
+}
+
+if (authModal) {
+  authModal.addEventListener('click', (e) => {
+    if (e.target === authModal) {
+      authModal.classList.remove('open');
+    }
+  });
+}
+
+if (authForm) {
+  authForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // Зупиняємо перезавантаження сторінки
+    
+    const email = document.getElementById('auth-email').value;
+    
+    // Показуємо красиве сповіщення
+    alert(`Вітаємо! Ви успішно увійшли як: ${email}`);
+    
+    // Закриваємо модалку та очищаємо поля
+    authModal.classList.remove('open');
+    authForm.reset();
+  });
+}
 /* === INIT === */
 document.addEventListener('DOMContentLoaded', () => {
   // Render products
