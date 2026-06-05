@@ -27,8 +27,9 @@
         </ul>
       </nav>
       <div class="header__actions">
-        <button class="btn-icon" onclick="openModal()" title="Кошик">
+        <button class="btn-icon" onclick="openCart()" title="Кошик" style="position:relative;">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span id="cartBadge" style="display:none; position:absolute; top:-6px; right:-6px; background:#C4A265; color:#fff; font-size:0.65rem; font-weight:700; width:18px; height:18px; border-radius:50%; align-items:center; justify-content:center;">0</span>
         </button>
         <button class="btn-icon" id="account-btn" title="Особистий кабінет">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -110,20 +111,18 @@
   </section>
 
   <!-- BANNER -->
-  <section class="banner">
-    <div class="banner__inner">
-      <div class="banner__text">
-        <p class="banner__label">Спеціальна пропозиція</p>
-        <h2 class="banner__title">Знижки до <span>30%</span><br>на весняну колекцію</h2>
-        <p class="banner__desc">Пропозиція діє до кінця місяця. Не пропустіть нагоду оновити свій інтер'єр.</p>
-        <div class="countdown" id="countdown"></div>
-        <a href="products.html" class="btn btn--primary">Переглянути акції</a>
-      </div>
-      <div class="banner__visual">
-        <div class="banner__shape"></div>
-      </div>
-    </div>
-  </section>
+<section class="banner">
+  <div class="banner__inner">
+    <p class="banner__label">🌟</p>
+    <h2 class="banner__title">Гаряча літня пропозиція</h2>
+    <div class="countdown" id="countdown"></div>
+    <button class="btn btn--primary" id="discountBtn"
+      onclick="toggleDiscount(); this.textContent = discountActive ? '✓ ЗНИЖКУ АКТИВОВАНО!' : 'ОТРИМАТИ ЗНИЖКУ';">
+      ОТРИМАТИ ЗНИЖКУ
+    </button>
+    <div class="banner__visual">🛋️</div>
+  </div>
+</section>
 
   <!-- TESTIMONIALS -->
   <section class="testimonials">
@@ -287,6 +286,22 @@
       
       <button type="submit" class="btn btn--primary btn--full">Увійти</button>
     </form>
+  </div>
+</div>
+<div class="modal-overlay" id="cartOverlay" onclick="closeCart(this)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal__close" onclick="closeCart()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h2 class="modal__title">Ваші товари</h2>
+    <div class="cart-list" id="cartList"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Загальна сума:</span>
+        <strong id="cartTotal">0 ₴</strong>
+      </div>
+      <button class="btn btn--primary btn--full" onclick="checkoutCart()">ЗАМОВИТИ</button>
+    </div>
   </div>
 </div>
   <script src="assets/js/main.js"></script>

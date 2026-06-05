@@ -25,10 +25,24 @@
         </ul>
       </nav>
       <div class="header__actions">
-        <button class="btn-icon" onclick="openModal()"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></button>
-        <button class="burger" id="burgerIcons"><span id="iconBars"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></span><span id="iconXmark" class="hide"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></button>
+        <button class="btn-icon" onclick="openCart()" title="Кошик" style="position:relative;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          <span id="cartBadge" style="display:none; position:absolute; top:-6px; right:-6px; background:#C4A265; color:#fff; font-size:0.65rem; font-weight:700; width:18px; height:18px; border-radius:50%; align-items:center; justify-content:center;">0</span>
+        </button>
+
+        <button class="btn-icon" id="account-btn" title="Особистий кабінет">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </button>
+
+        <button class="burger" id="burgerIcons" aria-label="Меню">
+          <span id="iconBars">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </span>
+          <span id="iconXmark" class="hide">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </span>
+        </button>
       </div>
-    </div>
   </header>
 
   <section class="page-hero page-hero--sm">
@@ -135,8 +149,42 @@
       </div>
     </div>
   </div>
+  <div class="modal-overlay" id="auth-modal">
+    <div class="modal">
+      <button class="modal__close" id="close-auth-btn">&times;</button>
+      <h3 class="modal__title">Вхід до кабінету</h3>
+      <p class="modal__sub">Введіть свої дані для авторизації на сайті BUKO</p>
+      <form id="auth-form">
+        <div class="form-group">
+          <label for="auth-email">Електронна пошта</label>
+          <input type="email" id="auth-email" class="form-input" placeholder="your@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="auth-password">Пароль</label>
+          <input type="password" id="auth-password" class="form-input" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full">Увійти</button>
+      </form>
+    </div>
+  </div>
+  <div class="modal-overlay" id="cartOverlay" onclick="closeCart(this)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal__close" onclick="closeCart()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <h2 class="modal__title">Ваші товари</h2>
+    <div class="cart-list" id="cartList"></div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Загальна сума:</span>
+        <strong id="cartTotal">0 ₴</strong>
+      </div>
+      <button class="btn btn--primary btn--full" onclick="checkoutCart()">ЗАМОВИТИ</button>
+    </div>
+  </div>
+</div>
 
-  <script src="main.js"></script>
+  <script src="assets/js/main.js"></script>
   <script>
     const teamMembers = [
       { name: 'Юлія Савченко', role: 'Засновниця та CEO', init: 'ЮС' },

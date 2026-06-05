@@ -3,20 +3,27 @@
    ============================================= */
 
 /* === PRODUCTS DATA === */
+const DISCOUNT_PERCENT = 15;
+let discountActive = false;
+
+function applyDiscount(price) {
+  return Math.round(price * (1 - DISCOUNT_PERCENT / 100));
+}
+
 const productsData = [
   {
     id: 1, cat: 'living',
     name: 'Диван Oslo',
-    desc: 'М\'який тризмісний диван, тканина букле',
-    price: '42 500 ₴',
-    emoji: '🛋️',
+    desc: 'М\'який трьохмісний диван, тканина букле',
+    price: 42500 ,
+    image: 'assets/images/divan-oslo.jpg',
     bg: 'linear-gradient(135deg, #e8ddd0, #d4c4b0)'
   },
   {
     id: 2, cat: 'living',
     name: 'Стіл Nordic',
     desc: 'Кавовий столик, масив дуба, 80×80 см',
-    price: '12 800 ₴',
+    price: 12800 ,
     emoji: '🪵',
     bg: 'linear-gradient(135deg, #d4c4a8, #c4b090)'
   },
@@ -24,7 +31,7 @@ const productsData = [
     id: 3, cat: 'bedroom',
     name: 'Ліжко Bergen',
     desc: 'Дерев\'яне узголів\'я, 160×200 см',
-    price: '28 900 ₴',
+    price: 28900 ,
     emoji: '🛏️',
     bg: 'linear-gradient(135deg, #e0d8d0, #cdc0b0)'
   },
@@ -32,7 +39,7 @@ const productsData = [
     id: 4, cat: 'kitchen',
     name: 'Стіл Fjord',
     desc: 'Обідній стіл, 140×80 см, масив сосни',
-    price: '18 200 ₴',
+    price: 18200 ,
     emoji: '🍽️',
     bg: 'linear-gradient(135deg, #d8cfc0, #c8bba0)'
   },
@@ -40,7 +47,7 @@ const productsData = [
     id: 5, cat: 'living',
     name: 'Крісло Havn',
     desc: 'Крісло-реклайнер, шкіра, бежевий',
-    price: '24 500 ₴',
+    price: 24500 ,
     emoji: '🪑',
     bg: 'linear-gradient(135deg, #ddd4c4, #c8b898)'
   },
@@ -48,7 +55,7 @@ const productsData = [
     id: 6, cat: 'office',
     name: 'Стіл Arbeid',
     desc: 'Робочий стіл з ящиками, 150×70 см',
-    price: '21 300 ₴',
+    price: 21300 ,
     emoji: '💼',
     bg: 'linear-gradient(135deg, #c8c0b8, #b8b0a0)'
   },
@@ -56,7 +63,7 @@ const productsData = [
     id: 7, cat: 'bedroom',
     name: 'Комод Lund',
     desc: 'Дерев\'яний комод, 5 ящиків, натуральний дуб',
-    price: '15 600 ₴',
+    price: 15600 ,
     emoji: '🗄️',
     bg: 'linear-gradient(135deg, #d0c8b8, #c0b8a0)'
   },
@@ -64,7 +71,7 @@ const productsData = [
     id: 8, cat: 'kitchen',
     name: 'Стільці Set Hav',
     desc: 'Набір 4 стільці, плетений ротанг',
-    price: '16 800 ₴',
+    price: 16800 ,
     emoji: '🪑',
     bg: 'linear-gradient(135deg, #c8c0a8, #b8a888)'
   },
@@ -72,7 +79,7 @@ const productsData = [
     id: 9, cat: 'office',
     name: 'Полиця Hylle',
     desc: 'Навісна полиця, 3 рівні, масив берези',
-    price: '8 200 ₴',
+    price: 8200 ,
     emoji: '📚',
     bg: 'linear-gradient(135deg, #d4ccc0, #c4bca8)'
   }
@@ -91,18 +98,20 @@ function renderProducts(containerId, limit) {
     card.className = 'product-card reveal';
     card.dataset.cat = p.cat;
     card.innerHTML = `
-      <div class="product-card__img">
-        <div class="product-card__visual" style="background:${p.bg}; font-size:4rem;">
-          ${p.emoji}
-        </div>
+      <div class="product-card__img-wrapper">
+        <img src="${p.image}" alt="${p.name}" class="product-card__img">
+      </div>
       </div>
       <div class="product-card__body">
         <p class="product-card__cat">${catLabel(p.cat)}</p>
         <h3 class="product-card__name">${p.name}</h3>
         <p class="product-card__desc">${p.desc}</p>
         <div class="product-card__footer">
-          <span class="product-card__price">${p.price}</span>
-          <button class="product-card__btn" onclick="openModal()">Замовити</button>
+          ${discountActive ? `<span class="product-card__old-price">${p.price.toLocaleString('uk-UA')} ₴</span>` : ''}
+          <span class="product-card__price${discountActive ? ' product-card__price--sale' : ''}">
+            ${discountActive ? applyDiscount(p.price).toLocaleString('uk-UA') + ' ₴' : p.price.toLocaleString('uk-UA') + ' ₴'}
+          </span>
+          <button class="product-card__btn" onclick="addToCart(${p.id})">Замовити</button>
         </div>
       </div>
     `;
@@ -191,9 +200,15 @@ function initCountdown() {
   const el = document.getElementById('countdown');
   if (!el) return;
 
-  const endDate = new Date();
-  endDate.setDate(endDate.getDate() + 24);
-  endDate.setHours(23, 59, 59, 0);
+  let endTimestamp = localStorage.getItem('buko_sale_end');
+if (!endTimestamp) {
+  const end = new Date();
+  end.setDate(end.getDate() + 30);
+  end.setHours(23, 59, 59, 0);
+  endTimestamp = end.getTime();
+  localStorage.setItem('buko_sale_end', endTimestamp);
+}
+const endDate = new Date(parseInt(endTimestamp));
 
   function update() {
     const now = new Date();
@@ -203,7 +218,6 @@ function initCountdown() {
     const days = Math.floor(diff / 86400);
     const hours = Math.floor((diff % 86400) / 3600);
     const mins = Math.floor((diff % 3600) / 60);
-    const secs = diff % 60;
 
     el.innerHTML = `
       <div class="countdown__item">
@@ -217,10 +231,6 @@ function initCountdown() {
       <div class="countdown__item">
         <span class="countdown__num">${String(mins).padStart(2, '0')}</span>
         <span class="countdown__label">Хвилин</span>
-      </div>
-      <div class="countdown__item">
-        <span class="countdown__num">${String(secs).padStart(2, '0')}</span>
-        <span class="countdown__label">Секунд</span>
       </div>
     `;
   }
@@ -274,6 +284,12 @@ function initReveal() {
   activateReveal();
 }
 
+function toggleDiscount() {
+  discountActive = !discountActive;
+  renderProducts('productsList', 6);
+  renderProducts('catalogList');
+}
+
 // === MODAL AUTHORIZATION WINDOW LOGIC === */
 
 const accountBtn = document.getElementById('account-btn');
@@ -315,6 +331,142 @@ if (authForm) {
     authForm.reset();
   });
 }
+
+/* === CART === */
+let cart = [];
+
+function addToCart(productId) {
+  const product = productsData.find(p => p.id === productId);
+  if (!product) return;
+
+  const existing = cart.find(item => item.id === productId);
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({ ...product, qty: 1 });
+  }
+
+  updateCartBadge();
+  animateCartFly(productId);
+}
+
+function updateCartBadge() {
+  const total = cart.reduce((sum, item) => sum + item.qty, 0);
+  let badge = document.getElementById('cartBadge');
+  if (!badge) return;
+  badge.textContent = total;
+  badge.style.display = total > 0 ? 'flex' : 'none';
+}
+
+function animateCartFly(productId) {
+  const card = document.querySelector(`[data-id="${productId}"]`);
+  const cartBtn = document.querySelector('.btn-icon[onclick*="openCart"]');
+  if (!card || !cartBtn) return;
+
+  const cardRect = card.getBoundingClientRect();
+  const cartRect = cartBtn.getBoundingClientRect();
+
+  const fly = document.createElement('div');
+  fly.className = 'cart-fly';
+  fly.textContent = card.querySelector('.product-card__visual').textContent.trim();
+  fly.style.cssText = `
+    position: fixed;
+    left: ${cardRect.left + cardRect.width / 2}px;
+    top: ${cardRect.top + cardRect.height / 2}px;
+    font-size: 2rem;
+    z-index: 9999;
+    pointer-events: none;
+    transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: scale(1);
+    opacity: 1;
+  `;
+  document.body.appendChild(fly);
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      fly.style.left = cartRect.left + cartRect.width / 2 + 'px';
+      fly.style.top = cartRect.top + cartRect.height / 2 + 'px';
+      fly.style.transform = 'scale(0.2)';
+      fly.style.opacity = '0';
+    });
+  });
+
+  setTimeout(() => fly.remove(), 750);
+}
+
+function openCart() {
+  renderCartModal();
+  const overlay = document.getElementById('cartOverlay');
+  if (overlay) overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCart(el) {
+  if (el && el.id !== 'cartOverlay') return;
+  const overlay = document.getElementById('cartOverlay');
+  if (overlay) overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function renderCartModal() {
+  const list = document.getElementById('cartList');
+  const totalEl = document.getElementById('cartTotal');
+  if (!list) return;
+
+  if (cart.length === 0) {
+    list.innerHTML = '<p class="cart-empty">Кошик порожній</p>';
+    if (totalEl) totalEl.textContent = '0 ₴';
+    return;
+  }
+
+  // Показуємо лише 2 товари в рядку
+  list.innerHTML = '';
+  cart.forEach(item => {
+    const price = discountActive ? applyDiscount(item.price) : item.price;
+    const el = document.createElement('div');
+    el.className = 'cart-item';
+    el.innerHTML = `
+      <span class="cart-item__emoji">${item.emoji}</span>
+      <div class="cart-item__info">
+        <span class="cart-item__name">${item.name}</span>
+        <span class="cart-item__price">${(price * item.qty).toLocaleString('uk-UA')} ₴</span>
+      </div>
+      <div class="cart-item__qty">
+        <button onclick="changeQty(${item.id}, -1)">−</button>
+        <span>${item.qty}</span>
+        <button onclick="changeQty(${item.id}, 1)">+</button>
+      </div>
+      <button class="cart-item__remove" onclick="removeFromCart(${item.id})">✕</button>
+    `;
+    list.appendChild(el);
+  });
+
+  const total = cart.reduce((sum, item) => {
+    const price = discountActive ? applyDiscount(item.price) : item.price;
+    return sum + price * item.qty;
+  }, 0);
+  if (totalEl) totalEl.textContent = total.toLocaleString('uk-UA') + ' ₴';
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) removeFromCart(id);
+  else { updateCartBadge(); renderCartModal(); }
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(i => i.id !== id);
+  updateCartBadge();
+  renderCartModal();
+}
+
+function checkoutCart() {
+  closeCart();
+  openModal();
+}
+
 /* === INIT === */
 document.addEventListener('DOMContentLoaded', () => {
   // Render products
