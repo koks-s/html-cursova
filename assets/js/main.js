@@ -15,7 +15,7 @@ const productsData = [
     id: 1, cat: 'living',
     name: 'Диван Oslo',
     desc: 'М\'який трьохмісний диван, тканина букле',
-    price: 42500 ,
+    price: 34500 ,
     image: 'assets/images/divan-oslo.jpg',
     bg: 'linear-gradient(135deg, #e8ddd0, #d4c4b0)'
   },
@@ -23,64 +23,64 @@ const productsData = [
     id: 2, cat: 'living',
     name: 'Стіл Nordic',
     desc: 'Кавовий столик, масив дуба, 80×80 см',
-    price: 12800 ,
-    emoji: '🪵',
+    price: 11800 ,
+    image: 'assets/images/stil-nordic.jpg',
     bg: 'linear-gradient(135deg, #d4c4a8, #c4b090)'
   },
   {
     id: 3, cat: 'bedroom',
     name: 'Ліжко Bergen',
     desc: 'Дерев\'яне узголів\'я, 160×200 см',
-    price: 28900 ,
-    emoji: '🛏️',
+    price: 23900 ,
+    image: 'assets/images/lizko-bergen.jpg',
     bg: 'linear-gradient(135deg, #e0d8d0, #cdc0b0)'
   },
   {
     id: 4, cat: 'kitchen',
     name: 'Стіл Fjord',
     desc: 'Обідній стіл, 140×80 см, масив сосни',
-    price: 18200 ,
-    emoji: '🍽️',
+    price: 16200 ,
+    image: 'assets/images/stil-fjord.jpg',
     bg: 'linear-gradient(135deg, #d8cfc0, #c8bba0)'
   },
   {
     id: 5, cat: 'living',
     name: 'Крісло Havn',
     desc: 'Крісло-реклайнер, шкіра, бежевий',
-    price: 24500 ,
-    emoji: '🪑',
+    price: 16500 ,
+    image: 'assets/images/krislo-havn.jpeg',
     bg: 'linear-gradient(135deg, #ddd4c4, #c8b898)'
   },
   {
     id: 6, cat: 'office',
     name: 'Стіл Arbeid',
     desc: 'Робочий стіл з ящиками, 150×70 см',
-    price: 21300 ,
-    emoji: '💼',
+    price: 18300 ,
+    image: 'assets/images/stil-arbeid.jpg',
     bg: 'linear-gradient(135deg, #c8c0b8, #b8b0a0)'
   },
   {
     id: 7, cat: 'bedroom',
     name: 'Комод Lund',
-    desc: 'Дерев\'яний комод, 5 ящиків, натуральний дуб',
-    price: 15600 ,
-    emoji: '🗄️',
+    desc: 'Дерев\'яний комод, 4 ящики, натуральний дуб',
+    price: 13600 ,
+    image: 'assets/images/komod-lund.jpg',
     bg: 'linear-gradient(135deg, #d0c8b8, #c0b8a0)'
   },
   {
     id: 8, cat: 'kitchen',
     name: 'Стільці Set Hav',
     desc: 'Набір 4 стільці, плетений ротанг',
-    price: 16800 ,
-    emoji: '🪑',
+    price: 12800 ,
+    image: 'assets/images/stilci-sethav.jpg',
     bg: 'linear-gradient(135deg, #c8c0a8, #b8a888)'
   },
   {
     id: 9, cat: 'office',
     name: 'Полиця Hylle',
-    desc: 'Навісна полиця, 3 рівні, масив берези',
-    price: 8200 ,
-    emoji: '📚',
+    desc: 'Навісна полиця, масив берези',
+    price: 4200 ,
+    image: 'assets/images/polica-hylle.jpg',
     bg: 'linear-gradient(135deg, #d4ccc0, #c4bca8)'
   }
 ];
@@ -97,10 +97,13 @@ function renderProducts(containerId, limit) {
     const card = document.createElement('div');
     card.className = 'product-card reveal';
     card.dataset.cat = p.cat;
+    card.dataset.id = p.id;
     card.innerHTML = `
       <div class="product-card__img-wrapper">
-        <img src="${p.image}" alt="${p.name}" class="product-card__img">
-      </div>
+        ${p.image 
+          ? `<img src="${p.image}" alt="${p.name}" class="product-card__real-img">`
+          : `<div class="product-card__visual" style="background:${p.bg};font-size:4rem;">${p.emoji || '🪑'}</div>`
+        }
       </div>
       <div class="product-card__body">
         <p class="product-card__cat">${catLabel(p.cat)}</p>
@@ -368,7 +371,9 @@ function animateCartFly(productId) {
 
   const fly = document.createElement('div');
   fly.className = 'cart-fly';
-  fly.textContent = card.querySelector('.product-card__visual').textContent.trim();
+  const visual = card.querySelector('.product-card__visual');
+  const product = productsData.find(p => p.id === productId);
+  fly.textContent = visual ? visual.textContent.trim() : (product ? (product.emoji || '🛋️') : '🛋️');
   fly.style.cssText = `
     position: fixed;
     left: ${cardRect.left + cardRect.width / 2}px;
@@ -426,7 +431,10 @@ function renderCartModal() {
     const el = document.createElement('div');
     el.className = 'cart-item';
     el.innerHTML = `
-      <span class="cart-item__emoji">${item.emoji}</span>
+      ${item.image 
+        ? `<img src="${item.image}" alt="${item.name}" class="cart-item__img">`
+        : `<span class="cart-item__emoji">${item.emoji || '🪑'}</span>`
+      }
       <div class="cart-item__info">
         <span class="cart-item__name">${item.name}</span>
         <span class="cart-item__price">${(price * item.qty).toLocaleString('uk-UA')} ₴</span>
