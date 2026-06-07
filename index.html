@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <meta name="description" content="BUKO — магазин сучасних меблів. Якісні меблі для вашого дому.">
   <title>BUKO — Магазин меблів</title>
-  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪑</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -74,21 +73,21 @@
           <div class="feature-card__icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
-          <h3>Гарантія якості</h3>
+          <h2>Гарантія якості</h2>
           <p>Усі меблі виготовлені з натуральних матеріалів та мають гарантію 5 років</p>
         </div>
         <div class="feature-card">
           <div class="feature-card__icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h6v8H16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
           </div>
-          <h3>Безкоштовна доставка</h3>
+          <h2>Безкоштовна доставка</h2>
           <p>Доставляємо по всій Україні. При замовленні від 15 000 грн — безкоштовно</p>
         </div>
         <div class="feature-card">
           <div class="feature-card__icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/><path d="M12 6v6l4 2"/></svg>
           </div>
-          <h3>Швидке виготовлення</h3>
+          <h2>Швидке виготовлення</h2>
           <p>Індивідуальне замовлення — від 14 днів. Стандартні позиції — зі складу</p>
         </div>
       </div>
@@ -100,7 +99,7 @@
     <div class="container">
       <div class="section-header">
         <p class="section-label">Каталог</p>
-        <h2 class="section-title">Популярні товари</h2>
+        <h3 class="section-title">Популярні товари</h3>
         <p class="section-desc">Відібрані вручну — для тих, хто цінує деталі</p>
       </div>
       <div class="products-grid" id="productsList"></div>
@@ -114,7 +113,7 @@
 <section class="banner">
   <div class="banner__inner">
     <p class="banner__label">🌟</p>
-    <h2 class="banner__title">Гаряча літня пропозиція</h2>
+    <h3 class="banner__title">Гаряча літня пропозиція</h3>
     <div class="countdown" id="countdown"></div>
     <button class="btn btn--primary" id="discountBtn"
       onclick="toggleDiscount(); this.textContent = discountActive ? '✓ ЗНИЖКУ АКТИВОВАНО!' : 'ОТРИМАТИ ЗНИЖКУ';">
@@ -129,7 +128,7 @@
     <div class="container">
       <div class="section-header">
         <p class="section-label">Відгуки</p>
-        <h2 class="section-title">Що кажуть клієнти</h2>
+        <h3 class="section-title">Що кажуть клієнти</h3>
       </div>
       <div class="testimonials__slider">
         <button class="slider-btn slider-btn--prev" id="prevBtn">
@@ -167,7 +166,7 @@
     <div class="container">
       <div class="newsletter__inner">
         <div class="newsletter__text">
-          <h2>Будьте першими</h2>
+          <h3>Будьте першими</h3>
           <p>Підпишіться на розсилку та отримайте знижку 10% на перше замовлення</p>
         </div>
         <div class="newsletter__form">
@@ -246,7 +245,7 @@
       <button class="modal__close" onclick="closeModal()">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
-      <h2 class="modal__title">Зв'яжіться з нами</h2>
+      <h3 class="modal__title">Зв'яжіться з нами</h3>
       <p class="modal__sub">Залиште заявку і ми передзвонимо протягом 30 хвилин</p>
       <div class="modal__form">
         <div class="form-group">
@@ -270,7 +269,7 @@
   <div class="modal">
     <button class="modal__close" id="close-auth-btn">&times;</button>
     
-    <h3 class="modal__title">Вхід до кабінету</h3>
+    <h4 class="modal__title">Вхід до кабінету</h4>
     <p class="modal__sub">Введіть свої дані для авторизації на сайті BUKO</p>
     
     <form id="auth-form">
@@ -293,7 +292,7 @@
     <button class="modal__close" onclick="closeCart()">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <h2 class="modal__title">Ваші товари</h2>
+    <h4 class="modal__title">Ваші товари</h4>
     <div class="cart-list" id="cartList"></div>
     <div class="cart-footer">
       <div class="cart-total">
