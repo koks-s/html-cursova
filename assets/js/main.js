@@ -1,8 +1,3 @@
-/* =============================================
-   BUKO Furniture Store — main.js
-   ============================================= */
-
-/* === PRODUCTS DATA === */
 const DISCOUNT_PERCENT = 15;
 let discountActive = false;
 
@@ -85,7 +80,6 @@ const productsData = [
   }
 ];
 
-/* === RENDER PRODUCTS === */
 function renderProducts(containerId, limit) {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -121,7 +115,6 @@ function renderProducts(containerId, limit) {
     container.appendChild(card);
   });
 
-  // Trigger reveal
   setTimeout(activateReveal, 100);
 }
 
@@ -130,7 +123,6 @@ function catLabel(cat) {
   return map[cat] || cat;
 }
 
-/* === MOBILE MENU === */
 const burgerIcons = document.getElementById('burgerIcons');
 const iconBars = document.getElementById('iconBars');
 const iconXmark = document.getElementById('iconXmark');
@@ -144,23 +136,19 @@ if (burgerIcons && menuList) {
   });
 }
 
-/* === HEADER SCROLL === */
 const header = document.getElementById('header');
 window.addEventListener('scroll', () => {
   if (header) {
     header.classList.toggle('scrolled', window.scrollY > 60);
   }
-  // Back to top
   const btn = document.getElementById('backToTop');
   if (btn) btn.classList.toggle('visible', window.scrollY > 400);
 }, { passive: true });
 
-/* === BACK TO TOP === */
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-/* === MODAL === */
 function openModal() {
   const overlay = document.getElementById('modalOverlay');
   if (overlay) overlay.classList.add('open');
@@ -174,18 +162,15 @@ function closeModal(el) {
   document.body.style.overflow = '';
 }
 
-// Close on Escape
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeModal();
 });
 
-/* === FORM SUBMIT === */
 function submitForm() {
   closeModal();
   alert('Дякуємо! Ваша заявка прийнята. Ми передзвонимо найближчим часом.');
 }
 
-/* === NEWSLETTER === */
 function subscribeNewsletter() {
   const input = document.getElementById('newsletterEmail');
   if (!input) return;
@@ -198,7 +183,6 @@ function subscribeNewsletter() {
   alert(`Дякуємо! ${email} додано до розсилки. Чекайте на знижку 10%!`);
 }
 
-/* === COUNTDOWN TIMER === */
 function initCountdown() {
   const el = document.getElementById('countdown');
   if (!el) return;
@@ -241,7 +225,6 @@ const endDate = new Date(parseInt(endTimestamp));
   setInterval(update, 1000);
 }
 
-/* === TESTIMONIALS SLIDER === */
 function initSlider() {
   const testimonials = document.querySelectorAll('.testimonial');
   const prevBtn = document.getElementById('prevBtn');
@@ -259,11 +242,9 @@ function initSlider() {
   prevBtn && prevBtn.addEventListener('click', () => goTo(current - 1));
   nextBtn && nextBtn.addEventListener('click', () => goTo(current + 1));
 
-  // Auto-advance
   setInterval(() => goTo(current + 1), 5000);
 }
 
-/* === SCROLL REVEAL === */
 function activateReveal() {
   const revealEls = document.querySelectorAll('.reveal:not(.visible)');
   const observer = new IntersectionObserver((entries) => {
@@ -278,7 +259,6 @@ function activateReveal() {
   revealEls.forEach(el => observer.observe(el));
 }
 
-/* === ADD REVEAL CLASS TO SECTIONS === */
 function initReveal() {
   const targets = document.querySelectorAll(
     '.feature-card, .value-card, .team-card, .testimonial, .about-intro__text, .about-intro__visual, .section-header, .contact-form-block, .contact-info-block'
@@ -293,7 +273,6 @@ function toggleDiscount() {
   renderProducts('catalogList');
 }
 
-// === MODAL AUTHORIZATION WINDOW LOGIC === */
 
 const accountBtn = document.getElementById('account-btn');
 const authModal = document.getElementById('auth-modal');
@@ -322,20 +301,17 @@ if (authModal) {
 
 if (authForm) {
   authForm.addEventListener('submit', (e) => {
-    e.preventDefault(); // Зупиняємо перезавантаження сторінки
+    e.preventDefault(); 
     
     const email = document.getElementById('auth-email').value;
     
-    // Показуємо красиве сповіщення
     alert(`Вітаємо! Ви успішно увійшли як: ${email}`);
     
-    // Закриваємо модалку та очищаємо поля
     authModal.classList.remove('open');
     authForm.reset();
   });
 }
 
-/* === CART === */
 let cart = [];
 
 function addToCart(productId) {
@@ -424,7 +400,6 @@ function renderCartModal() {
     return;
   }
 
-  // Показуємо лише 2 товари в рядку
   list.innerHTML = '';
   cart.forEach(item => {
     const price = discountActive ? applyDiscount(item.price) : item.price;
@@ -475,11 +450,9 @@ function checkoutCart() {
   openModal();
 }
 
-/* === INIT === */
 document.addEventListener('DOMContentLoaded', () => {
-  // Render products
-  renderProducts('productsList', 6);   // home: 6 items
-  renderProducts('catalogList');       // catalog: all items
+  renderProducts('productsList', 6);   
+  renderProducts('catalogList');       
 
   initCountdown();
   initSlider();

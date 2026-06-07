@@ -50,7 +50,6 @@
 
   <section class="catalog-section">
     <div class="container">
-      <!-- TABS -->
       <div class="tabs" id="categoryTabs">
         <button class="tab tab--active" data-cat="all">Усі</button>
         <button class="tab" data-cat="living">Вітальня</button>
@@ -63,7 +62,6 @@
     </div>
   </section>
 
-  <!-- NEWSLETTER -->
   <section class="newsletter">
     <div class="container">
       <div class="newsletter__inner">
@@ -152,7 +150,6 @@
 
   <script src="assets/js/main.js"></script>
   <script>
-    // Catalog-specific: filter by category
     document.querySelectorAll('.tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('tab--active'));
